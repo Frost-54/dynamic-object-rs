@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 description = "Proc macro for crate dynamic-object"
 license = "MIT"
+repository = "https://github.com/Frost-54/dynamic-object-rs.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
