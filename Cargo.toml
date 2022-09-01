@@ -7,10 +7,7 @@ exclude = ["BUILD.bazel", "build.bzl", ".gitignore"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies.dynamic]
-path = "dynamic"
-version = "0.1.0"
+[dependencies]
 
-[dependencies.dynamic_derive]
-path = "derive"
-version = "0.1.0"
+[dependencies.dynamic-object-derive]
+path = "./derive"

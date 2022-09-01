@@ -1,3 +1,4 @@
+//! derive for crate dynamic_object
 #![allow(non_snake_case)]
 
 use proc_macro::{TokenStream};
@@ -105,14 +106,14 @@ pub fn subclass(args: TokenStream, tokens: TokenStream) -> TokenStream {
       let result = quote! {
             #parse
 
-            impl dynamic::Class for #name {
+            impl dynamic_object::Class for #name {
                   type Parent = #parent;
                   const NAME:&'static str = #id;
 
                   fn isa(id: usize) -> bool {
                         println!("In {}", core::any::type_name::<Self>());
                         println!("In id: {}, Self::id: {}", id, Self::id());
-                        id == Self::id() || <Self as dynamic::Class>::Parent::isa(id)
+                        id == Self::id() || <Self as dynamic_object::Class>::Parent::isa(id)
                   }
 
                   // fn offsetof() -> usize;
