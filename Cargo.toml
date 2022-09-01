@@ -1,6 +1,6 @@
 [package]
 name = "dynamic-object"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 keywords = ["oop", "object-oriented", "inheritance"]
 exclude = ["BUILD.bazel", "build.bzl", ".gitignore"]
@@ -14,4 +14,4 @@ repository = "https://github.com/Frost-54/dynamic-object-rs.git"
 
 [dependencies.dynamic-object-derive]
 path = "./derive"
-version = "0.1.0"
+version = "0.1.1"
