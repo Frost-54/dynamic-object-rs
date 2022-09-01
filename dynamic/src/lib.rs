@@ -28,6 +28,8 @@ pub trait Class {
 }
 
 /// An object
+/// The ContainerT generic parameter controls the container of the object's pointer
+/// Dereference it (*object) to get the inner class
 pub struct Object<T: Class, ContainerT = Box<dyn Dyn>> {
       // A pointer to the object created
       // It should *always* point to the object created so it can be correctly freed
@@ -71,6 +73,7 @@ impl<T: Class, ContainerT> Object<T, ContainerT> {
       }
 
       /// Cast to type 'Cast'
+      /// panic if 'self' does not inherit from 'Cast'/ is not 'Cast'
       /// 
       ///  # Example:
       /// ```
@@ -109,7 +112,9 @@ impl<T: Class, ContainerT> Object<T, ContainerT> {
       /// assert!(object.parent.foo == 72840548);
       /// ```
       pub fn cast<Cast: Class>(self) -> Object<Cast, ContainerT> {
-            assert!(self.isa::<Cast>());
+            if isSubclassOf::<Cast, T>() {
+                  assert!(self.isa::<Cast>());
+            }
             let offset = if isSubclassOf::<Cast, T>() {
                   -typing::offsetOf::<T, Cast>()
             }
@@ -122,6 +127,28 @@ impl<T: Class, ContainerT> Object<T, ContainerT> {
                   _marker: PhantomData,
                   offset: self.offset + offset
             }
+      }
+
+      /// Try to cast to 'Cast'
+      pub fn try_cast<Cast: Class>(self) -> Option<Object<Cast, ContainerT>> {
+            if isSubclassOf::<Cast, T>() {
+                  if !self.isa::<Cast>() {
+                        return None
+                  }
+            }
+            
+            let offset = if isSubclassOf::<Cast, T>() {
+                  -typing::offsetOf::<T, Cast>()
+            }
+            else {
+                  typing::offsetOf::<Cast, T>()
+            } as i16;
+            Some(Object {
+                  object: self.object,
+                  isa: self.isa,
+                  _marker: PhantomData,
+                  offset: self.offset + offset
+            })
       }
 }
 
@@ -149,6 +176,21 @@ impl<T: Class, Container: DerefMut> DerefMut for Object<T, Container> {
                   &mut *inner
             }
       }
+}
+
+impl<T: Class, Container: Clone> Clone for Object<T, Container> {
+      fn clone(&self) -> Self {
+            Self { 
+                  object: self.object.clone(), 
+                  isa: self.isa, 
+                  offset: self.offset, 
+                  _marker: PhantomData
+            }
+      }
+}
+
+impl<T: Class, Container: Copy> Copy for Object<T, Container> {
+      
 }
 
 /// Base class for all objects
