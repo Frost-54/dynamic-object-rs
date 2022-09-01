@@ -203,10 +203,6 @@ impl<T: Class, Container: Copy> Copy for Object<T, Container> {
 /// ```
 pub struct DynamicObjectBase;
 
-impl DynamicObjectBase {
-      const ID: u8 = 0;
-}
-
 impl Class for DynamicObjectBase {
       type Parent = Self;
       const NAME: &'static str = "dynamic::ObjectBase";
@@ -220,7 +216,7 @@ impl Class for DynamicObjectBase {
       }
 
       fn id() -> usize {
-            &Self::ID as *const u8 as usize
+            Self::id as *const u8 as usize
       }
 }
 
@@ -249,6 +245,16 @@ mod test {
             parent: Class,
       }
 
+      #[subclass(DynamicObjectBase)]
+      struct BarObject {
+
+      }
+
+      #[subclass(DynamicObjectBase)]
+      struct AnotherObject {
+
+      }
+
       #[test]
       fn isa() {
             let object = Derived { 
@@ -260,6 +266,7 @@ mod test {
             };
             let object = Object::<Derived>::new(Box::new(object));
             assert!(object.isa::<DynamicObjectBase>());
+            assert!(!object.isa::<BarObject>());
       }
 
       #[test]

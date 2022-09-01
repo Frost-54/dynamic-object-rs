@@ -77,6 +77,8 @@ mod test {
       use dynamic_derive::subclass;
       use crate::{self as dynamic, isSubclassOf};
       use crate::{IsSameClass, DynamicObjectBase};
+      extern crate std;
+      use std::println;
 
       #[subclass(DynamicObjectBase)]
       struct MyClass {

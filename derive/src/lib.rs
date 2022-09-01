@@ -105,15 +105,13 @@ pub fn subclass(args: TokenStream, tokens: TokenStream) -> TokenStream {
       let result = quote! {
             #parse
 
-            impl #name {
-                  const ID: u8 = 0;
-            }
-
             impl dynamic::Class for #name {
                   type Parent = #parent;
                   const NAME:&'static str = #id;
 
                   fn isa(id: usize) -> bool {
+                        println!("In {}", core::any::type_name::<Self>());
+                        println!("In id: {}, Self::id: {}", id, Self::id());
                         id == Self::id() || <Self as dynamic::Class>::Parent::isa(id)
                   }
 
@@ -121,7 +119,7 @@ pub fn subclass(args: TokenStream, tokens: TokenStream) -> TokenStream {
                   #offsetof
 
                   fn id() -> usize {
-                        &Self::ID as *const u8 as usize
+                        Self::id as *const u8 as usize
                   }
             }
       };
