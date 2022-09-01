@@ -3,6 +3,7 @@ name = "dynamic-object"
 version = "0.1.0"
 edition = "2021"
 keywords = ["oop", "object oriented", "inheritance"]
+exclude = ["BUILD.bazel", "build.bzl", ".gitignore"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
