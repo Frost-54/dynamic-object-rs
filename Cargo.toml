@@ -9,6 +9,8 @@ exclude = ["BUILD.bazel", "build.bzl", ".gitignore"]
 
 [dependencies.dynamic]
 path = "./dynamic"
+version = "0.1.0"
 
 [dependencies.dynamic_derive]
 path = "derive"
+version = "0.1.0"
