@@ -1,0 +1,31 @@
+load("@rules_rust//rust:defs.bzl", "rust_library", "rust_test", "rust_proc_macro")
+
+rust_library(
+      name = "dynamic",
+      srcs = [
+            "dynamic/src/lib.rs",
+            "dynamic/src/typing.rs",
+      ],
+      proc_macro_deps = [
+            ":dynamic-derive"
+      ],
+      visibility = ["//visibility:public"],
+)
+
+rust_proc_macro(
+      name = "dynamic-derive",
+      srcs = [
+            "derive/src/lib.rs"
+      ],
+      deps = [
+            "@quote",
+            "@syn",
+            "@uuid"
+      ],
+      visibility = ["//visibility:public"],
+)
+
+rust_test(
+      name = "dynamic-test",
+      crate = ":dynamic"
+)
