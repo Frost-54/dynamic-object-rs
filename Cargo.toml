@@ -2,6 +2,7 @@
 name = "dynamic-object"
 version = "0.1.0"
 edition = "2021"
+keywords = ["oop", "object oriented", "inheritance"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
