@@ -18,6 +18,10 @@ impl<T> Dyn for T {
 
 }
 
+pub trait ContainerType {
+      type Type;
+}
+
 /// Implemented by #[subclass] macro
 pub trait Class {
       type Parent: Sized + Class;
@@ -233,6 +237,10 @@ mod test {
       use crate::*;
       // use std only when testing
       use std::{println, prelude::*};
+
+      trait A {
+
+      }
 
       #[subclass(DynamicObjectBase)]
       struct Class {
