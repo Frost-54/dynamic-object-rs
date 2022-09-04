@@ -48,4 +48,8 @@ To use virtual methods
 ```rust
 // Set second generic argument to your trait
 type MyObject = Object<MyClass, Box<dyn MyTrait>>
+// And access the vtable by
+object.vtable().method();
+// Or
+object.vtable_mut().methid();
 ```

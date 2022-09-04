@@ -18,10 +18,6 @@ impl<T> Dyn for T {
 
 }
 
-pub trait ContainerType {
-      type Type;
-}
-
 /// Implemented by #[subclass] macro
 pub trait Class {
       type Parent: Sized + Class;
@@ -132,6 +128,14 @@ impl<T: Class, ContainerT> Object<T, ContainerT> {
                   _marker: PhantomData,
                   offset: self.offset + offset
             }
+      }
+
+      pub fn vtable(&self) -> &ContainerT {
+            &self.object
+      }
+
+      pub fn vtable_mut(&mut self) -> &mut ContainerT {
+            &mut self.object
       }
 
       /// Try to cast to 'Cast'

@@ -74,6 +74,7 @@ pub fn offsetOf<Parent: Class, Child: Class>() -> isize {
 
 #[cfg(test)]
 mod test {
+      #![allow(unused_imports)]
       use dynamic_object_derive::subclass;
       use crate::{self as dynamic_object, isSubclassOf};
       use crate::{IsSameClass, DynamicObjectBase};
