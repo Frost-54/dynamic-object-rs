@@ -4,6 +4,7 @@
 #![allow(non_snake_case)]
 
 use core::{marker::PhantomData, ops::{Deref, DerefMut}};
+pub use dynamic_object_derive::*;
 extern crate alloc;
 use alloc::boxed::Box;
 pub mod typing;

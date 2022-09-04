@@ -1,19 +1,19 @@
 load("@rules_rust//rust:defs.bzl", "rust_library", "rust_test", "rust_proc_macro")
 
 rust_library(
-      name = "dynamic",
+      name = "dynamic-object",
       srcs = [
             "src/lib.rs",
             "src/typing.rs",
       ],
       proc_macro_deps = [
-            ":dynamic-derive"
+            ":dynamic-object-derive"
       ],
       visibility = ["//visibility:public"],
 )
 
 rust_proc_macro(
-      name = "dynamic-derive",
+      name = "dynamic-object-derive",
       srcs = [
             "derive/src/lib.rs"
       ],

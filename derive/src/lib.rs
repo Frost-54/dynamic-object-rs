@@ -19,7 +19,7 @@ impl Parse for Parent {
             let parent = match vars.first() {
                   Some(p) => p,
                   None => {
-                        panic!("Error: #[object] takes a parent");
+                        panic!("Error: #[subclass] takes a parent(ParentT, parent_field)");
                   },
             };
 
@@ -111,8 +111,6 @@ pub fn subclass(args: TokenStream, tokens: TokenStream) -> TokenStream {
                   const NAME:&'static str = #id;
 
                   fn isa(id: usize) -> bool {
-                        println!("In {}", core::any::type_name::<Self>());
-                        println!("In id: {}, Self::id: {}", id, Self::id());
                         id == Self::id() || <Self as dynamic_object::Class>::Parent::isa(id)
                   }
 
