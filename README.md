@@ -49,3 +49,9 @@ assert!(object.field == 2153746);
 assert!(object.parent.value == 548389);
 assert!(object.parent.foo == 72840548);
 ```
+
+To use virtual methods
+```rust
+// Set second generic argument to your trait
+type MyObject = Object<MyClass, Box<dyn MyTrait>>
+```
