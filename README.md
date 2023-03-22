@@ -51,5 +51,5 @@ type MyObject = Object<MyClass, Box<dyn MyTrait>>
 // And access the vtable by
 object.vtable().method();
 // Or
-object.vtable_mut().methid();
+object.vtable_mut().method();
 ```
